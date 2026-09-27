@@ -247,7 +247,7 @@ export default function Home() {
 
       <section className="cutout-section">
         <div className="cutout-copy reveal"><span className="section-kicker">007 / PORTRAIT STUDY</span><h2>KEEP YOUR<br /><em>HEAD IN IT.</em></h2><p>THE GAME ISN&apos;T A CHARACTER.<br />THE CHARACTER IS THE GAME.</p></div>
-        <div className="cutout-canvas"><div className="cutout-float" ref={cutoutArt} onMouseEnter={cursorLabel("VIEW")} onMouseLeave={cursorLabel("")}><Image className="portrait-full reveal" src="/images/full-body.jpeg" alt="Full body portrait of Papa Sophia" fill sizes="(max-width: 700px) 100vw, 55vw" /></div><div className="portrait-stamp">PAPA SOPHIA<br />EST. IN THE LOBBY</div></div>
+        <div className="cutout-canvas"><div className="cutout-float" ref={cutoutArt} onMouseEnter={cursorLabel("VIEW")} onMouseLeave={cursorLabel("")}><Image className="portrait-full reveal" src="/images/full-body.png" alt="Full body portrait of Papa Sophia" fill sizes="(max-width: 700px) 100vw, 55vw" /></div><div className="portrait-stamp">PAPA SOPHIA<br />EST. IN THE LOBBY</div></div>
         <div className="portrait-word" aria-hidden="true">UNFILTERED</div>
       </section>
 
