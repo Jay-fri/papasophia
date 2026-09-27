@@ -116,25 +116,39 @@ export default function Home() {
         <div className="archive-bottom"><span>VIEW DATA / —</span><span>SCROLL / 04 FILES</span></div>
       </section>
 
-      <section id="signal" className="stream-section section-dark">
-        <div className="stream-image reveal"><Image src="/images/headset.jpeg" alt="Papa Sophia streaming" fill sizes="100vw" /></div>
-        <div className="stream-copy reveal"><span className="section-kicker">004 / BROADCAST</span><h2>WHEN THE<br />MIC <em>OPENS.</em></h2><p>NO SCRIPT. NO SOFT CUT.<br />JUST THE MATCH.</p><a href="#contact" onMouseEnter={cursorLabel("OPEN")} onMouseLeave={cursorLabel("")} className="under-link">TUNE IN <b>↗</b></a></div>
-        <div className="stream-status"><span /><span>SIGNAL // ACTIVE</span><span>CODM / LIVE</span></div>
+      <section className="closeup-section section-dark">
+        <div className="closeup-rule" />
+        <div className="closeup-copy reveal" ref={closeupCopy}><span className="section-kicker">004 / CLOSE RANGE</span><h2>NO<br /><em>SECOND</em><br />TAKE.</h2><p>THE FEED STAYS ON.<br />SO DOES THE FACE.</p></div>
+        <div className="closeup-frame"><div className="closeup-art" ref={closeupArt}><Image src="/images/hero-closeup.jpeg" alt="Close-up portrait of Papa Sophia" fill sizes="(max-width: 700px) 100vw, 54vw" /></div></div>
+        <span className="closeup-caption">RAW // 001 &nbsp;&nbsp; NO FILTER</span>
       </section>
 
-      <section className="portrait-section">
-        <div className="portrait-copy reveal"><span className="section-kicker">005 / PORTRAIT STUDY</span><h2>KEEP YOUR<br /><em>HEAD IN IT.</em></h2><p>THE GAME ISN&apos;T A CHARACTER.<br />THE CHARACTER IS THE GAME.</p></div>
-        <div className="portrait-canvas"><Image className="portrait-full reveal" src="/images/full-body.jpeg" alt="Full body portrait of Papa Sophia" fill sizes="(max-width: 700px) 100vw, 55vw" /><div className="portrait-stamp">PAPA SOPHIA<br />EST. IN THE LOBBY</div></div>
+      <section id="signal" className="stream-section section-dark">
+        <div className="stream-action" aria-hidden="true"><Image src="/images/action-codm.jpeg" alt="" fill sizes="100vw" /></div>
+        <div className="stream-person reveal"><Image src="/images/headset.jpeg" alt="Papa Sophia streaming" fill sizes="(max-width: 700px) 92vw, 60vw" /></div>
+        <div className="stream-copy reveal"><span className="section-kicker">005 / THE SIGNAL</span><h2>WHEN THE<br />MIC <em>OPENS.</em></h2><p>THE PERSON BEHIND<br />THE MATCH.</p><a href="#contact" onMouseEnter={cursorLabel("OPEN")} onMouseLeave={cursorLabel("")} className="under-link">TUNE IN <b>↗</b></a></div>
+        <div className="stream-status"><span /><span>SIGNAL // ACTIVE</span><span>MATCH // CODM</span></div>
+      </section>
+
+      <section className="raw-section">
+        <div className="raw-image reveal"><Image src="/images/joker-moment.jpeg" alt="Psychological portrait of Papa Sophia" fill sizes="(max-width: 700px) 100vw, 66vw" /></div>
+        <div className="raw-copy reveal"><span className="section-kicker">006 / RAW // 001</span><h2>LESS<br />EDITS.<br /><em>MORE RAW.</em></h2><p>NO SCRIPT.<br />NO APOLOGY.</p></div>
+        <div className="raw-marker" aria-hidden="true">[ PS // UNFILTERED ]</div>
+      </section>
+
+      <section className="cutout-section">
+        <div className="cutout-copy reveal"><span className="section-kicker">007 / PORTRAIT STUDY</span><h2>KEEP YOUR<br /><em>HEAD IN IT.</em></h2><p>THE GAME ISN&apos;T A CHARACTER.<br />THE CHARACTER IS THE GAME.</p></div>
+        <div className="cutout-canvas"><Image className="portrait-full reveal" ref={cutoutArt} src="/images/full-body.jpeg" alt="Full body portrait of Papa Sophia" fill sizes="(max-width: 700px) 100vw, 55vw" /><div className="portrait-stamp">PAPA SOPHIA<br />EST. IN THE LOBBY</div></div>
         <div className="portrait-word" aria-hidden="true">UNFILTERED</div>
       </section>
 
       <section className="loadout section-dark">
         <div className="loadout-image reveal"><Image src="/images/face-fragment.jpeg" alt="Fragmented face artwork" fill sizes="(max-width: 700px) 100vw, 45vw" /></div>
-        <div className="loadout-copy reveal"><span className="section-kicker">006 / THE LOADOUT</span><h2>CREATOR<br /><em>IDENTITY</em></h2><dl><div><dt>GAME</dt><dd>CALL OF DUTY MOBILE</dd></div><div><dt>FORMAT</dt><dd>LIVE / SHORT FORM</dd></div><div><dt>MODE</dt><dd>ACTIVE</dd></div><div><dt>LOCATION</dt><dd>EVERYWHERE</dd></div></dl></div>
+        <div className="loadout-copy reveal"><span className="section-kicker">008 / THE LOADOUT</span><h2>CREATOR<br /><em>IDENTITY</em></h2><dl><div><dt>GAME</dt><dd>CALL OF DUTY MOBILE</dd></div><div><dt>FORMAT</dt><dd>LIVE / SHORT FORM</dd></div><div><dt>STATUS</dt><dd>ACTIVE</dd></div><div><dt>LOCATION</dt><dd>EVERYWHERE</dd></div></dl></div>
       </section>
 
       <footer id="contact" className="footer section-dark">
-        <span className="section-kicker">007 / LAST CALL</span><h2>ENTER THE<br /><em>LOBBY.</em></h2><a className="footer-action" href="https://www.tiktok.com" target="_blank" rel="noreferrer" onMouseEnter={cursorLabel("OPEN")} onMouseLeave={cursorLabel("")}>TIKTOK <b>↗</b></a>
+        <span className="section-kicker">009 / LAST CALL</span><h2>ENTER THE<br /><em>LOBBY.</em></h2><a className="footer-action" href="https://www.tiktok.com" target="_blank" rel="noreferrer" onMouseEnter={cursorLabel("OPEN")} onMouseLeave={cursorLabel("")}>TIKTOK <b>↗</b></a>
         <div className="footer-bottom"><span>© 2025 PAPA SOPHIA</span><span>CALL OF DUTY MOBILE CREATOR</span><span>ALL SIGNALS RESERVED</span></div>
       </footer>
     </main>
