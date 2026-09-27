@@ -4,11 +4,58 @@ import Image from "next/image";
 import { MouseEvent, useEffect, useRef, useState } from "react";
 
 const archive = [
-  { image: "/images/action-codm.jpeg", code: "01 / LIVE DROP", title: "CODM ENERGY", position: "50% 42%" },
-  { image: "/images/headset.jpeg", code: "02 / AFTER HOURS", title: "HEADSET ON", position: "50% 50%" },
-  { image: "/images/joker-moment.jpeg", code: "03 / CHARACTER STUDY", title: "THE JOKER MOMENT", position: "50% 50%" },
-  { image: "/images/face-fragment.jpeg", code: "04 / NOISE TEST", title: "FACE / FRAGMENT", position: "50% 50%" }
+  { video: "/video-previews/v1-preview.mp4", poster: "/video-posters/v1.jpg", code: "01 / FOOTAGE FILE", title: "MATCH // 01" },
+  { video: "/video-previews/v2-preview.mp4", poster: "/video-posters/v2.jpg", code: "02 / FOOTAGE FILE", title: "MATCH // 02" },
+  { video: "/video-previews/v3-preview.mp4", poster: "/video-posters/v3.jpg", code: "03 / FOOTAGE FILE", title: "MATCH // 03" },
+  { video: "/video-previews/v4-preview.mp4", poster: "/video-posters/v4.jpg", code: "04 / FOOTAGE FILE", title: "MATCH // 04" }
 ];
+
+const tiktokUrl = "https://www.tiktok.com/@papasophiagaming";
+
+function ArchiveClip({ clip, index, onCursor }: { clip: typeof archive[number]; index: number; onCursor: (label: string) => () => void }) {
+  const video = useRef<HTMLVideoElement>(null);
+  const [ready, setReady] = useState(false);
+  const [muted, setMuted] = useState(true);
+
+  useEffect(() => {
+    const element = video.current;
+    if (!element) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setReady(true);
+        if (ready) element.play().catch(() => undefined);
+      } else {
+        element.pause();
+      }
+    }, { rootMargin: "700px 0px", threshold: .06 });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [ready]);
+
+  useEffect(() => {
+    const element = video.current;
+    if (!element || !ready) return;
+    element.load();
+    element.play().catch(() => undefined);
+  }, [ready]);
+
+  function toggleSound() {
+    const element = video.current;
+    if (!element) return;
+    const nextMuted = !muted;
+    element.muted = nextMuted;
+    setMuted(nextMuted);
+    element.play().catch(() => undefined);
+  }
+
+  return <article className={`archive-item item-${index + 1} reveal`} onMouseEnter={onCursor("WATCH")} onMouseLeave={onCursor("")}>
+    <a className="clip-link" href={tiktokUrl} target="_blank" rel="noreferrer" aria-label={`Watch ${clip.title} on Papa Sophia's TikTok, opens in a new tab`}>
+      <div className="clip-image"><video ref={video} poster={clip.poster} muted={muted} loop playsInline preload="metadata" aria-hidden="true">{ready && <source src={clip.video} type="video/mp4" />}</video><span className="clip-watch" aria-hidden="true">WATCH <b>↗</b></span></div>
+      <div className="clip-copy"><span>{clip.code}</span><h3>{clip.title}</h3><span className="play">TIKTOK <b>↗</b></span></div>
+    </a>
+    <button className="sound-toggle" type="button" onClick={toggleSound} aria-pressed={!muted} aria-label={muted ? `Turn sound on for ${clip.title}` : `Mute ${clip.title}`}>{muted ? "SOUND ON" : "MUTE"}</button>
+  </article>;
+}
 
 function ScrollLink({ children, to, onNavigate }: { children: React.ReactNode; to: string; onNavigate?: () => void }) {
   function scroll(e: MouseEvent<HTMLAnchorElement>) {
@@ -21,7 +68,6 @@ function ScrollLink({ children, to, onNavigate }: { children: React.ReactNode; t
 
 export default function Home() {
   const [menu, setMenu] = useState(false);
-  const [activeArchive, setActiveArchive] = useState<number | null>(null);
   const [stats, setStats] = useState({ followers: 32.1, likes: 1.1 });
   const cursorRef = useRef<HTMLDivElement>(null);
   const heroArt = useRef<HTMLDivElement>(null);
@@ -173,11 +219,8 @@ export default function Home() {
 
       <section id="archive" className="archive">
         <div className="archive-head reveal"><div><span className="section-kicker">003 / THE ARCHIVE</span><h2>SELECTED<br /><em>NOISE</em></h2></div><p>RECORDED IN THE MOMENT.<br />NO CLEAN VERSION.</p></div>
-        <div className={`archive-list ${activeArchive !== null ? "has-active" : ""}`}>
-          {archive.map((clip, index) => <a className={`archive-item item-${index + 1} reveal ${activeArchive === index ? "is-active" : ""}`} key={clip.code} href="https://www.tiktok.com/@papasophiagaming" target="_blank" rel="noreferrer" aria-label={`Watch ${clip.title} on Papa Sophia's TikTok, opens in a new tab`} onMouseEnter={() => { setActiveArchive(index); cursorLabel("WATCH")(); }} onMouseLeave={() => { setActiveArchive(null); cursorLabel("")(); }}>
-            <div className="clip-image"><Image src={clip.image} alt={clip.title} fill sizes="(max-width: 700px) 78vw, 42vw" style={{ objectPosition: clip.position }} /></div>
-            <div className="clip-copy"><span>{clip.code}</span><h3>{clip.title}</h3><span className="play">PLAY <b>↗</b></span></div>
-          </a>)}
+        <div className="archive-list">
+          {archive.map((clip, index) => <ArchiveClip clip={clip} index={index} key={clip.code} onCursor={cursorLabel} />)}
         </div>
         <div className="archive-bottom"><span>VIEW DATA / —</span><span>SCROLL / 04 FILES</span></div>
       </section>

@@ -73,19 +73,23 @@ h1 span:last-child { margin-left:9.4vw; color:transparent; -webkit-text-stroke:1
 h2 em { font-style:normal; color:transparent; -webkit-text-stroke:1px currentColor; }
 .archive-head p { color:#4b4b4b; text-align:right; margin-bottom:7px; }
 .archive-list { display:grid; grid-template-columns:repeat(4, 1fr); gap:1.4vw; align-items:start; }
-.archive-item { cursor:none; display:block; transition:opacity .45s ease, transform .45s ease; }
-.archive-item:focus-visible { outline:2px solid #050505; outline-offset:6px; }
-.archive-list.has-active .archive-item:not(.is-active) { opacity:.7; }
-.archive-item.is-active { transform:translateY(-4px); }
+.archive-item { cursor:none; position:relative; transition:transform .45s ease; }
+.clip-link { display:block; }
+.clip-link:focus-visible { outline:2px solid #050505; outline-offset:6px; }
 .archive-item:nth-child(even) { margin-top:80px; }
 .clip-image { height:clamp(250px, 31vw, 475px); position:relative; overflow:hidden; background:#222; }
-.clip-image img { object-fit:cover; filter:grayscale(1) contrast(1.15); transition:transform .75s cubic-bezier(.2,.6,.2,1), filter .4s; }
-.archive-item:hover .clip-image img, .archive-item.is-active .clip-image img { transform:scale(1.065) translate3d(1.2%, -.8%, 0); filter:grayscale(1) contrast(1.22) brightness(.9); }
+.clip-image video { width:100%; height:100%; object-fit:cover; display:block; pointer-events:none; filter:grayscale(1) contrast(1.1); transition:transform .75s cubic-bezier(.2,.6,.2,1), filter .4s; }
+.archive-item:hover .clip-image video { transform:scale(1.035) translate3d(.6%, -.4%, 0); filter:grayscale(1) contrast(1.14) brightness(.96); }
+.clip-watch { position:absolute; inset:0; display:grid; place-items:center; color:#f5f5f5; background:rgba(5,5,5,.14); font:700 9px Arial,sans-serif; letter-spacing:.15em; opacity:0; transition:opacity .35s ease; }
+.clip-watch b { font-size:16px; margin-left:7px; }
+.archive-item:hover .clip-watch, .clip-link:focus-visible .clip-watch { opacity:1; }
 .clip-copy { padding-top:11px; display:grid; grid-template-columns:1fr auto; gap:5px; font-size:9px; letter-spacing:.1em; font-weight:bold; }
 .clip-copy h3 { grid-column:1 / -1; font-size:clamp(20px, 2.15vw, 34px); line-height:.88; letter-spacing:-.02em; }
-.play { text-align:right; opacity:.58; transition:opacity .35s ease, transform .35s ease; }
-.archive-item.is-active .play { opacity:1; transform:translateX(3px); }
+.play { text-align:right; opacity:.74; transition:opacity .35s ease, transform .35s ease; }
+.archive-item:hover .play { opacity:1; transform:translateX(3px); }
 .play b { font-size:15px; }
+.sound-toggle { position:absolute; z-index:3; top:9px; right:9px; min-height:30px; padding:8px 9px; border:1px solid rgba(245,245,245,.62); color:#f5f5f5; background:rgba(5,5,5,.64); font:700 8px Arial,sans-serif; letter-spacing:.1em; cursor:pointer; transition:background .2s ease, color .2s ease; }
+.sound-toggle:hover, .sound-toggle:focus-visible { color:#050505; background:#f5f5f5; outline:none; }
 .archive-bottom { display:flex; justify-content:space-between; border-top:1px solid #777; margin-top:68px; padding-top:13px; font-size:9px; letter-spacing:.13em; font-weight:bold; }
 .closeup-section { min-height:100svh; position:relative; overflow:hidden; padding:9vw 3.5vw 5vw; }
 .closeup-rule { height:1px; background:var(--line); width:100%; position:absolute; top:82px; left:0; }
@@ -154,7 +158,9 @@ dt { color:#868686; } dd { margin:0; text-align:right; }
 @media (hover:none), (pointer:coarse) {
   .cursor, .page-progress { display:none; }
   .archive-item { cursor:default; }
-  .archive-item:hover .clip-image img { transform:none; filter:grayscale(1) contrast(1.15); }
+  .archive-item:hover .clip-image video { transform:none; filter:grayscale(1) contrast(1.1); }
+  .clip-watch { opacity:1; place-items:end start; padding:10px; background:linear-gradient(0deg, rgba(5,5,5,.58), transparent 43%); }
+  .sound-toggle { min-height:38px; min-width:84px; top:10px; right:10px; }
 }
 @media (min-width:701px) and (max-width:1100px) {
   .nav { padding:0 4vw; }
